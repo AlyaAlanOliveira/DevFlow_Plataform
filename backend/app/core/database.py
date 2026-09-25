@@ -43,10 +43,6 @@ def get_db() -> Generator[Session, None, None]:
         db.close()
 
 
-# Event listener para configurar timezone UTC
-@event.listens_for(engine, "connect")
-def set_timezone_utc(dbapi_conn, connection_record):
-    """Configura timezone UTC para a conexão"""
-    cursor = dbapi_conn.cursor()
-    cursor.execute("SET TIME ZONE 'UTC'")
-    cursor.close()
+# Event listener para configurar timezone UTC (SQL Server não suporta SET TIME ZONE)
+# SQL Server usa DATETIMEOFFSET e DATETIME2 que já armazenam em UTC
+# Removido o event listener pois não é necessário para SQL Server
