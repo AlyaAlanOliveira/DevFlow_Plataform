@@ -5,7 +5,7 @@ Model base com campos de auditoria
 from datetime import datetime
 from typing import Optional
 from uuid import UUID, uuid4
-from sqlalchemy import Column, DateTime, Boolean, String
+from sqlalchemy import Column, DateTime, Boolean, String, text
 from sqlalchemy.dialects.mssql import UNIQUEIDENTIFIER, TIMESTAMP
 from app.core.database import Base
 
@@ -26,8 +26,9 @@ class AuditMixin:
     DeletedBy = Column(UNIQUEIDENTIFIER, nullable=True)
     IsDeleted = Column(Boolean, nullable=False, default=False)
     
-    # Controle de Concorrência
-    RowVersion = Column(TIMESTAMP, nullable=False)
+    # Controle de Concorrência (gerenciado automaticamente pelo SQL Server)
+    # TIMESTAMP/ROWVERSION é auto-gerado, não deve ser incluído em INSERT/UPDATE
+    RowVersion = Column(TIMESTAMP, nullable=False, server_default=text('NULL'))
 
 
 class BaseModel(Base, AuditMixin):

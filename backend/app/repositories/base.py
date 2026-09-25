@@ -64,6 +64,10 @@ class BaseRepository(Generic[ModelType]):
         if not include_deleted:
             query = query.filter(self.model.IsDeleted == False)
         
+        # SQL Server requer ORDER BY quando usa OFFSET/LIMIT
+        # Ordena por CreatedAt (padrão) para garantir ordem consistente
+        query = query.order_by(self.model.CreatedAt.desc())
+        
         return query.offset(skip).limit(limit).all()
     
     def count(self, include_deleted: bool = False) -> int:
