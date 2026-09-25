@@ -256,5 +256,139 @@ class WorkflowStatusService:
         return self.repository.soft_delete(status_id, deleted_by)
 
 
-# Services para ActorComplexity e UseCaseComplexity seguem o mesmo padrão...
-# (Omitidos por brevidade, mas seguem a mesma estrutura)
+class ActorComplexityService:
+    """Service para ActorComplexity"""
+    
+    def __init__(self, db: Session):
+        self.db = db
+        self.repository = ActorComplexityRepository(db)
+    
+    def get_all(
+        self, 
+        skip: int = 0, 
+        limit: int = 100,
+        active_only: bool = True
+    ) -> tuple[List[ActorComplexity], int]:
+        """Busca todas as complexidades de ator"""
+        items = self.repository.get_active() if active_only else self.repository.get_all(skip, limit)
+        total = len(items) if active_only else self.repository.count()
+        return items, total
+    
+    def get_by_id(self, complexity_id: UUID) -> ActorComplexity:
+        """Busca complexidade por ID"""
+        complexity = self.repository.get_by_id(complexity_id)
+        if not complexity:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail=f"ActorComplexity com ID {complexity_id} não encontrada"
+            )
+        return complexity
+    
+    def create(self, data: ActorComplexityCreate, created_by: UUID) -> ActorComplexity:
+        """Cria nova complexidade de ator"""
+        existing = self.repository.get_by_code(data.Code)
+        if existing:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=f"ActorComplexity com código {data.Code} já existe"
+            )
+        
+        complexity = ActorComplexity(
+            ActorComplexityId=uuid4(),
+            **data.model_dump(),
+            CreatedAt=datetime.utcnow(),
+            CreatedBy=created_by
+        )
+        
+        return self.repository.create(complexity)
+    
+    def update(
+        self, 
+        complexity_id: UUID, 
+        data: ActorComplexityUpdate,
+        updated_by: UUID
+    ) -> ActorComplexity:
+        """Atualiza complexidade de ator"""
+        complexity = self.get_by_id(complexity_id)
+        
+        for field, value in data.model_dump(exclude_unset=True).items():
+            setattr(complexity, field, value)
+        
+        complexity.UpdatedAt = datetime.utcnow()
+        complexity.UpdatedBy = updated_by
+        
+        return self.repository.update(complexity)
+    
+    def delete(self, complexity_id: UUID, deleted_by: UUID) -> bool:
+        """Faz soft delete de complexidade de ator"""
+        complexity = self.get_by_id(complexity_id)
+        return self.repository.soft_delete(complexity_id, deleted_by)
+
+
+class UseCaseComplexityService:
+    """Service para UseCaseComplexity"""
+    
+    def __init__(self, db: Session):
+        self.db = db
+        self.repository = UseCaseComplexityRepository(db)
+    
+    def get_all(
+        self, 
+        skip: int = 0, 
+        limit: int = 100,
+        active_only: bool = True
+    ) -> tuple[List[UseCaseComplexity], int]:
+        """Busca todas as complexidades de caso de uso"""
+        items = self.repository.get_active() if active_only else self.repository.get_all(skip, limit)
+        total = len(items) if active_only else self.repository.count()
+        return items, total
+    
+    def get_by_id(self, complexity_id: UUID) -> UseCaseComplexity:
+        """Busca complexidade por ID"""
+        complexity = self.repository.get_by_id(complexity_id)
+        if not complexity:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail=f"UseCaseComplexity com ID {complexity_id} não encontrada"
+            )
+        return complexity
+    
+    def create(self, data: UseCaseComplexityCreate, created_by: UUID) -> UseCaseComplexity:
+        """Cria nova complexidade de caso de uso"""
+        existing = self.repository.get_by_code(data.Code)
+        if existing:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=f"UseCaseComplexity com código {data.Code} já existe"
+            )
+        
+        complexity = UseCaseComplexity(
+            UseCaseComplexityId=uuid4(),
+            **data.model_dump(),
+            CreatedAt=datetime.utcnow(),
+            CreatedBy=created_by
+        )
+        
+        return self.repository.create(complexity)
+    
+    def update(
+        self, 
+        complexity_id: UUID, 
+        data: UseCaseComplexityUpdate,
+        updated_by: UUID
+    ) -> UseCaseComplexity:
+        """Atualiza complexidade de caso de uso"""
+        complexity = self.get_by_id(complexity_id)
+        
+        for field, value in data.model_dump(exclude_unset=True).items():
+            setattr(complexity, field, value)
+        
+        complexity.UpdatedAt = datetime.utcnow()
+        complexity.UpdatedBy = updated_by
+        
+        return self.repository.update(complexity)
+    
+    def delete(self, complexity_id: UUID, deleted_by: UUID) -> bool:
+        """Faz soft delete de complexidade de caso de uso"""
+        complexity = self.get_by_id(complexity_id)
+        return self.repository.soft_delete(complexity_id, deleted_by)
