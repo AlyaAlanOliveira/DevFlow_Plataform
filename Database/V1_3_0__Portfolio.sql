@@ -1,0 +1,16 @@
+CREATE TABLE portfolio.BusinessCase(
+ BusinessCaseId UNIQUEIDENTIFIER NOT NULL PRIMARY KEY,
+ Number VARCHAR(30) NOT NULL UNIQUE,
+ Title NVARCHAR(300) NOT NULL,
+ Status VARCHAR(20) NOT NULL
+);
+GO
+CREATE TABLE portfolio.Demand(
+ DemandId UNIQUEIDENTIFIER NOT NULL PRIMARY KEY,
+ BusinessCaseId UNIQUEIDENTIFIER NOT NULL,
+ DemandNumber VARCHAR(30) NOT NULL UNIQUE,
+ Title NVARCHAR(300) NOT NULL,
+ Priority VARCHAR(20) NOT NULL CHECK(Priority IN ('Low','Medium','High','Critical')),
+ Status VARCHAR(30) NOT NULL,
+ CONSTRAINT FK_Demand_BusinessCase FOREIGN KEY(BusinessCaseId) REFERENCES portfolio.BusinessCase(BusinessCaseId)
+);

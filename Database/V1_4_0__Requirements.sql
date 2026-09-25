@@ -1,0 +1,8 @@
+CREATE TABLE req.Requirement(
+ RequirementId UNIQUEIDENTIFIER NOT NULL PRIMARY KEY,
+ DemandId UNIQUEIDENTIFIER NOT NULL,
+ Code VARCHAR(30) NOT NULL UNIQUE,
+ RequirementType VARCHAR(10) NOT NULL CHECK(RequirementType IN ('RN','RF','RNF')),
+ Title NVARCHAR(250) NOT NULL,
+ CONSTRAINT FK_Requirement_Demand FOREIGN KEY(DemandId) REFERENCES portfolio.Demand(DemandId)
+);

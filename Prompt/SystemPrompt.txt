@@ -1,0 +1,170 @@
+Boa noite.
+
+ESCOPO Macro
+
+Vamos iniciar um projeto diferente hoje.
+
+Voltado para minha área de TI em desenvolvimento e sustentação de software.
+
+Vamos desenvolver uma plataforma para gestão das demandas de desenvolvimento com:
+
+1 - inclusão de novas Features
+2 - Integrações com outros sistemas internos
+3 - Integrações com outros sistemas de clientes
+4 - Integrações com outros sistemas de fornecedores
+5 - Automatizações de processo dentro de sistemas
+6 - Automatizações de processos manuais com planilhas
+7 - Melhorias de Features já existentes nos sistemas
+8 - Alteração de Features já existentes nos sistemas
+
+A ideia é montar um modelo hibrido com Agile Scrum, RUP com documentação UML para análise e estimativa de esforço com User Case Point e ITIL para gestão com GMUD, priorização, evidências de homologação e controle de Realease e caso necessário RollBack.
+
+TECNOLOGIA
+
+Vamos utilizar Python como linguagem de Backend e Vue para Front End. 
+
+O banco de dados será SQL Server 2025
+
+Dados para conexão ao Banco são 
+
+Usuário DevFlowAdm com senha D3vFl0w#Aly@ para administração e criação dos artefatos no banco de dados 
+Usuário DevFlowUser com senha D3vFl0w#Us3r35 para conexão e utilizaçao das rotinas a serem desenvolvidas
+
+Para conexão no desenvolvimento vamos utilizar HostName ALYA-TI-001\SQLSERVERLOCAL - Permitir configuração para alteração do hostname para ambiente de Desenvolvimento Dev, Homologação Homolog e Produção Prod
+
+O Banco utilizado será DevFlow_ALYA
+
+Todas os objetos criados devem ser dentro do Schema devflow e as tabelas devem ter o prefixo dvfw_
+
+
+FUNCIONALIDADE
+
+1 - CONTROLE DE USUÁRIO
+Precisamos ter um controle de usuário sendo o login o e-mail do usuário com envio de e-mail para criação da senha sendo a senha um padrão forte com 10 caracteres com ao menos 1 letra maiúscula, 1 letra minúscula, 1 número e 1 caracter especial entre esses !, @, #, $, % e &
+
+O usuário deve ter permissão para Requisição, Aprovação de Requisição, Escrita de Caso de Uso, Aprovação de Caso de Uso, Escrita de User Stories, Aprovação de User Stories, Estimativa com User Case Point, Aprovação da Estimativa com User Case Point, Priorização, Trade-Off de Priorização
+
+
+REGRA DE NEGÓCIO MACRO
+
+Vamos trabalhar com 4 etapas
+
+1 - Demanda
+2 - Requisito de Negócio e Caso de Uso
+3 - User Stores com Regras de Negócios RN e Critério de Aceite AC para cada RN deve existir um ou mais AC
+4 - Métricas User Case Points
+
+Para cada etapa deve haver uma aprovação.
+
+TEMPLATE UTILIZADO NO PROCESSO MANUAL HOJE EXISTENTE A SER SISTEMATIZADO
+
+Na pasta Modelos do projeto temos 1 arquivo com a estrutura de dados a serem preenchidos para cada etapa. São documentos crus sem dados, mas com títulos e algumas explicações sobre o conteúdo a ser preenchido.
+
+DETALHAMENTO DA PLANILHA PARA CALCULO DE UCP (User Case Point)
+
+A planilha 4 - metrica-UCP-Modelo.xlsx é um pouco mais complexa com 7 abas que se relacionam e possuem fórmulas para calculo de 
+
+User Case Point sem Ajuste UUCP com base nas abas atores e casos_de_uso
+Apontar fator de complexidade (TCF) com base na aba fatores_tecnicos
+Apontar fatores ambientais (EF) com base na aba fatores_ambientais
+e User Case Ajustado (UCP)
+
+Fechando a estimativa de esforço mutiplicando o UCP de Elaboração pela quantidade de Horas por UCP Horas / UCP-Modelo
+
+Para o calculo do esforço total do projeto ela considera 60% das horas de Desenvolvimento para Análise, 20% das horas de desenvolvimento para Teste e 20% das horas de desenvolvimento para Acompanhamento da Homologação
+
+Gerando a somatória dessa horas o esforço do desenvolvimento
+
+Com o esforço calculado mutipica o total de horas pelo Valor Hora Homem Valor HH em reais calculando o custo do desenvolvimento
+
+É informado o número máximo de recursos simultâneos que podem atuar no projeto e o total de horas do projeto é dividido pela quantidade de recursos simultâneos para apresentar o tempo em dias úteis para o entrega do desenvolvimento
+
+ARQUITETURA DE SOFTWARE 
+
+Preciso que seja uma aplicação modular com cada macro funcionalidade como um módulo.
+
+Gestão de Usuários
+Gestão de Tabelas Domínio
+Gestão de Demanda
+Gestão de Requisito de Negócio e Caso de Uso
+Gestão de User Stories
+Gestão de Metrica User Case Point
+
+Preciso que seja Orientada a Objetos
+
+Um objeto em particular merece detalhe
+
+Squad Desenvolvimento
+Squad formada por equipe com Analista de Requisitos, Desenvolvedor, Analista de Qualidade podendo ter 1 ou mais de cada recurso e essa Squad terá alguns atributos da configuração fatores ambientais (EF) com base na aba fatores_ambientais 
+Esses atributos serão :
+
+FA1
+FA2
+FA3
+FA4 
+FA5
+FA7
+FA8
+
+Outro ponto são micros serviços
+
+O processo de envio para aprovação e aprovação de cada etapa precisa ser um microservice
+
+O Agente de IA para ajudar a validar os textos dos artefatos Demanda, Requisito de Negócio, Users Cases, Users Stories e suas respectivas Regras de Negócio (RN) e Critérios de Aceites (CA)
+
+DEFINIÇÃO DE TABELAS DE DOMINIO
+
+Vamos precisar de um cadastro de Sistemas da empresa com nome, versão de produção para que a Demanda quando aberta tenha a informação de qual ou quais sistemas serão alterados
+
+Vamos precisar de um cadastro de área demandante e associar os usuários que podem abrir ou aprovar as etapas 1, 2, 3 
+
+Vamos precisar de um cadastro de Operações/Plataforma/Contratante - Com código e Descrição que identifica o nosso cliente e sua operação de serviço dentro da nossa empresa Exemplo 1 - GetNet, 2 - Mercado Pago, 3 - Dock Last Mile, 4 - Dock Middle Mile, 5 - Dock Armazenagem e Reparo, 0 - ALYA & Mobyan (Indoor), 99 - ALYA  & Mobyan (Outdoor)
+
+Vamos precisar de um cadastro de prioridades
+
+Vamos precisar de um cadastro que defina que usuário pode mudar a prioridade de uma demanda de uma determinada área demandante 
+
+Vamos precisar de um cadastro de usuários que possam executar e aprovar a etapa 4 porque a estimativa pode ser feita por um desenvolvedor e termos a aprovação de uma analista, tech lead ou Product Owner
+
+
+INICIO DO PROCESSO FASE 1
+
+Toda nova demanda deve ter o solicitante, qual sistema e versão, área solicitante, Operações/Plataforma/Contratante (Um ou mais)
+
+Toda demanda vai ter um código com o prefixo DDev seguido do ano com 4 digitos e um sequencial de 8 digitos permitindo até 10 milhões de demandas por ano. Exemplo a quadragésima quinta demanda aberta no ano de 2026 será DDev20260000045
+
+Toda demanda deve ter em usa abertura os dados a serem preenchidos conforme o arquivo template 1 - Template - Demanda de desenvolvimento.pptx
+
+Após a abertura demanda deve ser aprovada e ter a prioridade definida pelo aprovador. Neste momento deve-se registrar a data e hora de aprovação
+
+Aprovador deve ter uma tela para consulta com todas as Demandas pendentes de aprovação para sua área e ter filtros que permitam a ele consultar as demandas já aprovadas ou rejeitadas e suas respectivas etapas e Leadtime de passagem em cada uma delas
+
+Após aprovada a demanda ela volta para o demandante executar o preenchimento do Requisito de Negócio e Caso de Uso Macro.
+
+Uma demanda rejeitada deve ter a data e hora de rejeição e solicitar ao aprovador o motivo da rejeição - Aqui é necessário um agente de IA que faça a análise do motivo de rejeição indicando se o motivo informado está adequado a demanda colocada. Exemplo de motivo de rejeição adequado:  Demanda de Criação de Relatório para Controle de Equipamento - Rejeitado - Motivo Rejeição: Utilizar a Aplicação para controle de equipamento Exemplo de motivo de rejeição inadequado. Demanda: Cria tela para informar serial do equipamento e trazer histórico. Rejeitado. Motivo da Rejeição: Eu não quero
+
+
+FASE 2
+
+A Etapa 2 deve ter todas as informações necessárias conforme o arquivo template 2 - RNUC - Requisitos de Negócios - Users Cases Macro.docx
+
+A Etapa 2 permite revisão registrando as alterações entre uma revisão e outra e após esse processo passar por aprovação
+
+O aprovador deve ter uma tela com todas os Requisitos de Negócios - Users Cases Macros pendentes de aprovação e ao aprovar registrar a data e hora de aprovação teve permitir ainda a consulta de Requisitos de Negócios e Users Case Aprovados ou rejeitados anteriormente sendo que Requisitos de Negócios e User Cases Rejeitados voltam para o demandante para uma nova revisão e envio para aprovação
+
+Vamos precisar de um agente de IA para as etapas 1, 2 e 3 seja validando ou ajudando o demandante a escrever a Demanda, os Casos de Usos, as Users Stories e com Machine Learnig com conhecimento dos sistemas e negócio e questionando as necessidades solicitadas com possíveis GAP ou inconsistências do negócio com as Respectivas Regras de Negócio e Critérios de Aceite
+
+Após aprovada a demanda vai pro time de TI definir que analista dará sequimento
+
+FASE 3
+
+A Etapa 3 deve ter todas as informações necessárias conforme o arquivo template 3 - User Stories Detalhada.docx 
+
+O analista de TI designado deve preencher todos os campos, um Requisito de Negocio e User Case pode ter mais de uma User Stories e toda User Stories precisa estar associada a um Requisito de Negócio e User Case
+O analista de TI deve ser um usuário da aplicação
+Deve ser registrada a data e hora de designação do analista de TI responsável pela atividade e o usuário que fez a designação.
+O analista de TI pode em determinados momentos solicitar ajuda ao demandante para esclarecimento de alguma Regra de Negócio RN ou um Critério de Aceite CA. Neste momento deve
+
+
+
+
