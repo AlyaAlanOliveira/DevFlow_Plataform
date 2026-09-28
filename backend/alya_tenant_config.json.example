@@ -1,0 +1,16 @@
+{
+  "CompanyId": "00000000-0000-0000-0000-000000000001",
+  "TenantId": "YOUR_TENANT_ID_HERE",
+  "TenantName": "YOUR_COMPANY_NAME",
+  "TenantDomain": "yourcompany.com",
+  "ClientId": "YOUR_CLIENT_ID_HERE",
+  "ClientSecret": "YOUR_CLIENT_SECRET_HERE",
+  "Authority": "https://login.microsoftonline.com/YOUR_TENANT_ID_HERE",
+  "RedirectUri": "http://localhost:5173/auth/callback",
+  "PostLogoutRedirectUri": "http://localhost:5173",
+  "IsActive": true,
+  "AllowAutoUserCreation": true,
+  "RequireGroupMembership": false,
+  "Description": "Tenant Entra ID configuration",
+  "ConfigurationNotes": "Copy this file to alya_tenant_config.json and fill with your values"
+}

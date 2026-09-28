@@ -98,6 +98,26 @@
           to="/ucp-configurations"
         ></v-list-item>
       </v-list>
+
+      <v-divider></v-divider>
+
+      <!-- Administração (Apenas Admin DevFlow) -->
+      <v-list v-if="isAdminDevFlow">
+        <v-list-subheader>
+          <v-icon start size="small" color="error">mdi-shield-crown</v-icon>
+          ADMINISTRAÇÃO
+        </v-list-subheader>
+        
+        <v-list-item
+          prepend-icon="mdi-microsoft-azure"
+          title="Configuração Entra ID"
+          to="/admin/entraid-tenants"
+        >
+          <template #append>
+            <v-chip size="x-small" color="error" variant="flat">ADMIN</v-chip>
+          </template>
+        </v-list-item>
+      </v-list>
     </v-navigation-drawer>
 
     <!-- Main Content -->
@@ -124,6 +144,10 @@ import { useRouter } from 'vue-router'
 
 const drawer = ref(false)
 const router = useRouter()
+
+// TODO: Obter do usuário autenticado
+// Por enquanto, mock para desenvolvimento
+const isAdminDevFlow = ref(true) // Mudar para false para testar sem admin
 
 const logout = () => {
   // TODO: Implementar logout

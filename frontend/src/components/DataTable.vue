@@ -1,6 +1,15 @@
 <template>
   <v-card>
     <v-card-title class="d-flex align-center">
+      <!-- Back to Dashboard Button -->
+      <v-btn
+        icon="mdi-home"
+        variant="text"
+        to="/"
+        class="mr-2"
+        title="Voltar ao Dashboard"
+      ></v-btn>
+
       <v-icon start>{{ icon }}</v-icon>
       {{ title }}
       

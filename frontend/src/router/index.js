@@ -57,6 +57,15 @@ const router = createRouter({
           name: 'ucp-configurations',
           component: () => import('@/views/configuration/UCPConfigurationView.vue'),
           meta: { title: 'Configurações UCP' }
+        },
+        {
+          path: 'admin/entraid-tenants',
+          name: 'entraid-tenants',
+          component: () => import('@/views/admin/EntraidTenantView.vue'),
+          meta: { 
+            title: 'Configuração Entra ID',
+            requiresAdmin: true  // Flag para indicar que requer admin
+          }
         }
       ]
     }

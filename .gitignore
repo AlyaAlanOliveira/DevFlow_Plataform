@@ -16,6 +16,14 @@ build/
 .env
 .env.local
 
+# Azure/Entra ID secrets
+backend/alya_tenant_config.json
+*_tenant_config.json
+!*.example
+Doc/Tenant*.txt
+backend/test_alya_tenant.py
+backend/insert_alya_tenant.sql
+
 # IDE
 .vscode/
 .idea/

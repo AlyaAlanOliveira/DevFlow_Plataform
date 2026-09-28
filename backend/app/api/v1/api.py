@@ -10,7 +10,8 @@ from app.api.v1.endpoints import (
     actor_complexity,
     usecase_complexity,
     operation,
-    ucp_configuration
+    ucp_configuration,
+    entraid_tenant
 )
 
 api_router = APIRouter()
@@ -25,3 +26,6 @@ api_router.include_router(usecase_complexity.router)
 # Endpoints de Configuração (cfg schema)
 api_router.include_router(operation.router)
 api_router.include_router(ucp_configuration.router)
+
+# Endpoints de Autenticação (auth schema) - ADMIN ONLY
+api_router.include_router(entraid_tenant.router)
