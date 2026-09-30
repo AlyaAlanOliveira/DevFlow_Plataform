@@ -82,20 +82,120 @@
       </v-card-title>
       <v-divider></v-divider>
       <v-card-text>
-        <v-row>
-          <v-col cols="12" md="3" v-for="action in quickActions" :key="action.title">
-            <v-card
-              :to="action.to"
-              hover
-              class="text-center pa-4"
-            >
-              <v-icon size="48" :color="action.color" class="mb-2">
-                {{ action.icon }}
-              </v-icon>
-              <h3 class="text-subtitle-1">{{ action.title }}</h3>
-            </v-card>
-          </v-col>
-        </v-row>
+        <!-- Governança -->
+        <div class="mb-4">
+          <h3 class="text-h6 mb-3">
+            <v-icon start color="blue">mdi-domain</v-icon>
+            Governança
+          </h3>
+          <v-row>
+            <v-col cols="12" sm="6" md="4" lg="3" v-for="action in getActionsByCategory('Governança')" :key="action.title">
+              <v-card
+                :to="action.to"
+                hover
+                class="text-center pa-4"
+                variant="outlined"
+              >
+                <v-icon size="40" :color="action.color" class="mb-2">
+                  {{ action.icon }}
+                </v-icon>
+                <h4 class="text-subtitle-2">{{ action.title }}</h4>
+              </v-card>
+            </v-col>
+          </v-row>
+        </div>
+
+        <!-- Segurança -->
+        <div class="mb-4">
+          <h3 class="text-h6 mb-3">
+            <v-icon start color="purple">mdi-shield-account</v-icon>
+            Segurança
+          </h3>
+          <v-row>
+            <v-col cols="12" sm="6" md="4" lg="3" v-for="action in getActionsByCategory('Segurança')" :key="action.title">
+              <v-card
+                :to="action.to"
+                hover
+                class="text-center pa-4"
+                variant="outlined"
+              >
+                <v-icon size="40" :color="action.color" class="mb-2">
+                  {{ action.icon }}
+                </v-icon>
+                <h4 class="text-subtitle-2">{{ action.title }}</h4>
+              </v-card>
+            </v-col>
+          </v-row>
+        </div>
+
+        <!-- Referência -->
+        <div class="mb-4">
+          <h3 class="text-h6 mb-3">
+            <v-icon start color="primary">mdi-book-open-variant</v-icon>
+            Referência
+          </h3>
+          <v-row>
+            <v-col cols="12" sm="6" md="4" lg="3" v-for="action in getActionsByCategory('Referência')" :key="action.title">
+              <v-card
+                :to="action.to"
+                hover
+                class="text-center pa-4"
+                variant="outlined"
+              >
+                <v-icon size="40" :color="action.color" class="mb-2">
+                  {{ action.icon }}
+                </v-icon>
+                <h4 class="text-subtitle-2">{{ action.title }}</h4>
+              </v-card>
+            </v-col>
+          </v-row>
+        </div>
+
+        <!-- Configuração -->
+        <div class="mb-4">
+          <h3 class="text-h6 mb-3">
+            <v-icon start color="orange">mdi-cog</v-icon>
+            Configuração
+          </h3>
+          <v-row>
+            <v-col cols="12" sm="6" md="4" lg="3" v-for="action in getActionsByCategory('Configuração')" :key="action.title">
+              <v-card
+                :to="action.to"
+                hover
+                class="text-center pa-4"
+                variant="outlined"
+              >
+                <v-icon size="40" :color="action.color" class="mb-2">
+                  {{ action.icon }}
+                </v-icon>
+                <h4 class="text-subtitle-2">{{ action.title }}</h4>
+              </v-card>
+            </v-col>
+          </v-row>
+        </div>
+
+        <!-- Administração -->
+        <div>
+          <h3 class="text-h6 mb-3">
+            <v-icon start color="error">mdi-shield-crown</v-icon>
+            Administração
+          </h3>
+          <v-row>
+            <v-col cols="12" sm="6" md="4" lg="3" v-for="action in getActionsByCategory('Administração')" :key="action.title">
+              <v-card
+                :to="action.to"
+                hover
+                class="text-center pa-4"
+                variant="outlined"
+              >
+                <v-icon size="40" :color="action.color" class="mb-2">
+                  {{ action.icon }}
+                </v-icon>
+                <h4 class="text-subtitle-2">{{ action.title }}</h4>
+              </v-card>
+            </v-col>
+          </v-row>
+        </div>
       </v-card-text>
     </v-card>
 
@@ -143,31 +243,100 @@ const stats = ref({
 })
 
 const quickActions = [
+  // Governança
+  {
+    title: 'Holdings',
+    icon: 'mdi-domain',
+    color: 'blue',
+    to: '/governance/holdings',
+    category: 'Governança'
+  },
+  {
+    title: 'Empresas',
+    icon: 'mdi-office-building',
+    color: 'blue-darken-1',
+    to: '/governance/companies',
+    category: 'Governança'
+  },
+  {
+    title: 'Squads',
+    icon: 'mdi-account-group',
+    color: 'blue-darken-2',
+    to: '/governance/squads',
+    category: 'Governança'
+  },
+  // Segurança
+  {
+    title: 'Usuários',
+    icon: 'mdi-account',
+    color: 'purple',
+    to: '/security/users',
+    category: 'Segurança'
+  },
+  {
+    title: 'Perfis',
+    icon: 'mdi-shield-account',
+    color: 'purple-darken-1',
+    to: '/security/roles',
+    category: 'Segurança'
+  },
+  {
+    title: 'Permissões',
+    icon: 'mdi-key',
+    color: 'purple-darken-2',
+    to: '/security/permissions',
+    category: 'Segurança'
+  },
+  // Referência
   {
     title: 'Prioridades',
     icon: 'mdi-flag',
     color: 'primary',
-    to: '/priorities'
+    to: '/priorities',
+    category: 'Referência'
   },
   {
     title: 'Tipos de Demanda',
     icon: 'mdi-file-document',
     color: 'success',
-    to: '/demand-types'
+    to: '/demand-types',
+    category: 'Referência'
   },
   {
     title: 'Status Workflow',
     icon: 'mdi-state-machine',
     color: 'warning',
-    to: '/workflow-status'
+    to: '/workflow-status',
+    category: 'Referência'
   },
+  // Configuração
   {
     title: 'Operações',
-    icon: 'mdi-office-building',
+    icon: 'mdi-cog',
+    color: 'orange',
+    to: '/operations',
+    category: 'Configuração'
+  },
+  {
+    title: 'Config. UCP',
+    icon: 'mdi-calculator',
+    color: 'orange-darken-1',
+    to: '/ucp-configurations',
+    category: 'Configuração'
+  },
+  // Administração
+  {
+    title: 'Entra ID',
+    icon: 'mdi-microsoft-azure',
     color: 'error',
-    to: '/operations'
+    to: '/admin/entraid-tenants',
+    category: 'Administração'
   }
 ]
+
+function getActionsByCategory(category) {
+  return quickActions.filter(action => action.category === category)
+}
 
 async function loadStats() {
   try {

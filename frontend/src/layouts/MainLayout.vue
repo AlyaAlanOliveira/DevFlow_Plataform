@@ -2,7 +2,20 @@
   <v-app>
     <!-- App Bar -->
     <v-app-bar color="primary" prominent>
-      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon 
+        @click="drawer = !drawer"
+        title="Menu de Navegação"
+      >
+        <v-badge
+          v-if="!drawer"
+          color="error"
+          content="Menu"
+          inline
+        >
+          <v-icon>mdi-menu</v-icon>
+        </v-badge>
+        <v-icon v-else>mdi-menu</v-icon>
+      </v-app-bar-nav-icon>
       
       <v-toolbar-title class="text-h5 font-weight-bold">
         DevFlow ALYA
