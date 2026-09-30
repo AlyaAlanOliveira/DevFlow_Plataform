@@ -48,44 +48,22 @@
               </v-col>
 
               <v-col cols="12" md="6">
+                <v-text-field
+                  v-model="form.CompanyId"
+                  label="ID da Empresa *"
+                  :rules="[rules.required]"
+                  hint="UUID da empresa (gov.Company)"
+                  persistent-hint
+                ></v-text-field>
+              </v-col>
+
+              <v-col cols="12" md="6">
                 <v-select
-                  v-model="form.OperationType"
-                  label="Tipo de Operação *"
-                  :items="operationTypes"
+                  v-model="form.ClientType"
+                  label="Tipo de Cliente *"
+                  :items="clientTypes"
                   :rules="[rules.required]"
                 ></v-select>
-              </v-col>
-
-              <v-col cols="12" md="6">
-                <v-text-field
-                  v-model="form.CNPJ"
-                  label="CNPJ"
-                  v-mask="'##.###.###/####-##'"
-                  hint="Formato: 00.000.000/0000-00"
-                ></v-text-field>
-              </v-col>
-
-              <v-col cols="12" md="6">
-                <v-text-field
-                  v-model="form.ContactName"
-                  label="Nome do Contato"
-                ></v-text-field>
-              </v-col>
-
-              <v-col cols="12" md="6">
-                <v-text-field
-                  v-model="form.ContactEmail"
-                  label="Email do Contato"
-                  type="email"
-                ></v-text-field>
-              </v-col>
-
-              <v-col cols="12" md="6">
-                <v-text-field
-                  v-model="form.ContactPhone"
-                  label="Telefone do Contato"
-                  v-mask="'(##) #####-####'"
-                ></v-text-field>
               </v-col>
 
               <v-col cols="12" md="6">
@@ -142,19 +120,17 @@ import DataTable from '@/components/DataTable.vue'
 
 const store = useOperationStore()
 
-const operationTypes = [
-  'Customer',
-  'Supplier',
-  'Partner',
-  'Internal'
+// Tipos de cliente conforme constraint do banco
+const clientTypes = [
+  { title: 'Interno', value: 'Internal' },
+  { title: 'Externo', value: 'External' },
+  { title: 'Parceiro', value: 'Partner' }
 ]
 
 const headers = [
   { title: 'Código', key: 'Code', sortable: true },
   { title: 'Nome', key: 'Name', sortable: true },
-  { title: 'Tipo', key: 'OperationType', sortable: true },
-  { title: 'CNPJ', key: 'CNPJ', sortable: true },
-  { title: 'Contato', key: 'ContactName', sortable: true },
+  { title: 'Tipo de Cliente', key: 'ClientType', sortable: true },
   { title: 'Status', key: 'IsActive', sortable: true },
   { title: 'Ações', key: 'actions', sortable: false, align: 'center' }
 ]
@@ -164,15 +140,15 @@ const formRef = ref(null)
 const formValid = ref(false)
 const isEditing = ref(false)
 const saving = ref(false)
+// CompanyId da empresa ALYA (deve ser obtido do backend ou configuração)
+const ALYA_COMPANY_ID = '00000000-0000-0000-0000-000000000001'
+
 const form = ref({
   Code: '',
   Name: '',
   Description: '',
-  OperationType: '',
-  CNPJ: '',
-  ContactName: '',
-  ContactEmail: '',
-  ContactPhone: '',
+  CompanyId: ALYA_COMPANY_ID,
+  ClientType: '',
   IsActive: true
 })
 
@@ -198,11 +174,8 @@ function openDialog(item = null) {
       Code: '',
       Name: '',
       Description: '',
-      OperationType: '',
-      CNPJ: '',
-      ContactName: '',
-      ContactEmail: '',
-      ContactPhone: '',
+      CompanyId: ALYA_COMPANY_ID,
+      ClientType: '',
       IsActive: true
     }
   }
