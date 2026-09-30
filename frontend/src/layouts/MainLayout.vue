@@ -45,6 +45,86 @@
 
       <v-divider></v-divider>
 
+      <!-- Governança -->
+      <v-list>
+        <v-list-subheader>GOVERNANÇA</v-list-subheader>
+        
+        <v-list-item
+          prepend-icon="mdi-domain"
+          title="Holdings"
+          to="/governance/holdings"
+        ></v-list-item>
+
+        <v-list-item
+          prepend-icon="mdi-office-building"
+          title="Empresas"
+          to="/governance/companies"
+        ></v-list-item>
+
+        <v-list-item
+          prepend-icon="mdi-office-building-outline"
+          title="Diretorias"
+          to="/governance/directorates"
+        ></v-list-item>
+
+        <v-list-item
+          prepend-icon="mdi-view-grid"
+          title="Áreas"
+          to="/governance/areas"
+        ></v-list-item>
+
+        <v-list-item
+          prepend-icon="mdi-account-group"
+          title="Squads"
+          to="/governance/squads"
+        ></v-list-item>
+
+        <v-list-item
+          prepend-icon="mdi-account-multiple"
+          title="Membros de Squad"
+          to="/governance/squad-members"
+        ></v-list-item>
+      </v-list>
+
+      <v-divider></v-divider>
+
+      <!-- Segurança -->
+      <v-list>
+        <v-list-subheader>SEGURANÇA</v-list-subheader>
+        
+        <v-list-item
+          prepend-icon="mdi-account"
+          title="Usuários"
+          to="/security/users"
+        ></v-list-item>
+
+        <v-list-item
+          prepend-icon="mdi-shield-account"
+          title="Perfis (Roles)"
+          to="/security/roles"
+        ></v-list-item>
+
+        <v-list-item
+          prepend-icon="mdi-key"
+          title="Permissões"
+          to="/security/permissions"
+        ></v-list-item>
+
+        <v-list-item
+          prepend-icon="mdi-account-key"
+          title="Perfis de Usuário"
+          to="/security/user-roles"
+        ></v-list-item>
+
+        <v-list-item
+          prepend-icon="mdi-shield-lock"
+          title="Autorizações de Prioridade"
+          to="/security/priority-authorizations"
+        ></v-list-item>
+      </v-list>
+
+      <v-divider></v-divider>
+
       <!-- Referência -->
       <v-list>
         <v-list-subheader>REFERÊNCIA</v-list-subheader>
@@ -87,8 +167,8 @@
         <v-list-subheader>CONFIGURAÇÃO</v-list-subheader>
         
         <v-list-item
-          prepend-icon="mdi-office-building"
-          title="Operações"
+          prepend-icon="mdi-cog"
+          title="Operações / Clientes"
           to="/operations"
         ></v-list-item>
 
